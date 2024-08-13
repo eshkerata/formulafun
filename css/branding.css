@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'Raleway';
+    src: url(/src/Raleway-VariableFont_wght.ttf) format(truetype);
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Urbanist';
+    src: url(/src/Urbanist-VariableFont_wght.ttf) format(truetype);
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+.logo {
+    font-family: 'Urbanist', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2.2em;
+}
+
+.dev-info, .dev-info a, .dev-info a:visited {
+    color: #000;
+    opacity: 0.7;
+}

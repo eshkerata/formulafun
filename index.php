@@ -18,6 +18,14 @@ $columns = $pdo->prepare("SELECT * FROM columns WHERE user_id = ?");
 $columns->execute([$user_id]);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['toggle_complete'])) {
+        $task_id = $_POST['task_id'];
+        $completed = $_POST['completed'] ? 0 : 1;
+        $stmt = $pdo->prepare("UPDATE tasks SET completed = ? WHERE id = ?");
+        $stmt->execute([$completed, $task_id]);
+        header('Location: index.php');
+        exit();
+    }
     if (isset($_POST['new_column'])) {
         $title = $_POST['column_title'];
         $stmt = $pdo->prepare("INSERT INTO columns (user_id, title) VALUES (?, ?)");
@@ -78,32 +86,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Formula</title>
+    <link rel="stylesheet" href="/css/index-style.css">
+    <script>
+        function confirmDeletion(itemType, itemName, formElement) {
+            const confirmation = confirm(`Вы действительно хотите удалить ${itemType}: ${itemName}?`);
+            if (confirmation) {
+                formElement.submit();
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="user-panel">
-        <h1>Formula</h1>
+        <h1 class="logo">Formula</h1>
         <p>Вход выполнен как <?php echo htmlspecialchars($email); ?>.</p>
         <form method="POST" action="">
-            <input type="text" name="column_title" placeholder="Новая задача" required>
-            <button type="submit" name="new_column">Создать новую задачу</button>
+            <input type="text" name="column_title" placeholder="Новый столбец" required>
+            <button type="submit" name="new_column">Создать новый столбец</button>
         </form>
         <a href="logout.php"><button>Выйти</button></a>
+        <p class="dev-info">
+            Билд 14082024, команда "Эщкерята"<br>
+            <a href="https://t.me/eshkerata_team">тгк</a> | 
+            <a href="https://github.com/eshkerata/formulafun">ГитХаб</a>
+        </p>
     </div>
 
     <div class="board">
         <?php while ($column = $columns->fetch(PDO::FETCH_ASSOC)): ?>
             <div class="column">
-                <form method="POST" action="">
-                    <input type="text" name="column_title" value="<?php echo htmlspecialchars($column['title']); ?>" onblur="this.form.submit()">
-                    <input type="hidden" name="column_id" value="<?php echo $column['id']; ?>">
-                    <button type="submit" name="edit_column">Сохранить</button>
-                </form>
-                <form method="POST" action="">
-                    <input type="hidden" name="column_id" value="<?php echo $column['id']; ?>">
-                    <button type="submit" class="delete-btn" name="delete_column">Удалить столбец</button>
-                </form>
+                <div class="column-control">
+                    <form method="POST" action="">
+                        <input type="text" name="column_title" value="<?php echo htmlspecialchars($column['title']); ?>" onblur="this.form.submit()">
+                        <input type="hidden" name="column_id" value="<?php echo $column['id']; ?>">
+                        <button type="submit" name="edit_column">Сохранить</button>
+                    </form>
+                    <form method="POST" action="" onsubmit="event.preventDefault(); confirmDeletion('столбец', '<?php echo htmlspecialchars($column['title']); ?>', this);">
+                        <input type="hidden" name="column_id" value="<?php echo $column['id']; ?>">
+                        <button type="submit" class="delete-btn" name="delete_column">Удалить столбец</button>
+                    </form>
+                </div>
 
                 <?php
                 $tasks = $pdo->prepare("SELECT * FROM tasks WHERE column_id = ?");
@@ -118,7 +141,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </form>
                         <form method="POST" action="">
                             <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
-                            <button type="submit" class="delete-btn" name="delete_task">🗑</button>
+                            <input type="hidden" name="completed" value="<?php echo $task['completed']; ?>">
+                            <button type="submit" class="toggle_complete" name="toggle_complete"><?php echo $task['completed'] ? '❌' : '✔️'; ?></button>
+                        </form>
+                        <form method="POST" action="" onsubmit="event.preventDefault(); confirmDeletion('задачу', '<?php echo htmlspecialchars($task['title']); ?>', this);">
+                            <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
+                            <button type="submit" class="delete-btn" name="delete_task" style="font-size: 1.2em;">🗑</button>
                         </form>
                     </div>
                 <?php endwhile; ?>
@@ -126,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <form method="POST" action="">
                     <input type="text" name="task_title" placeholder="Добавить задачу" required>
                     <input type="hidden" name="column_id" value="<?php echo $column['id']; ?>">
-                    <button type="submit" name="new_task">+</button>
+                    <button type="submit" name="new_task" style="font-size: 1.2em;">+</button>
                 </form>
             </div>
         <?php endwhile; ?>

@@ -1,0 +1,62 @@
+@import url(branding.css);
+
+body {
+    font-family: 'Raleway',Arial,sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0
+}
+
+form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box
+}
+
+form input[type=email],form input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 16px
+}
+
+form button {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px
+}
+
+form button:hover {
+    background-color: #0056b3
+}
+
+form input[type=email]:focus,form input[type=password]:focus {
+    border-color: #007bff;
+    outline: 0
+}
+
+form input[type=email]::placeholder,form input[type=password]::placeholder {
+    color: #999
+}
+
+form input[type=email]:-webkit-autofill,form input[type=password]:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset;
+    box-shadow: 0 0 0 1000px #fff inset
+}
