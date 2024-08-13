@@ -43,7 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    if (isset($_POST['delete_task'])) {
+    // Handle delete task with confirmation
+    if (isset($_POST['delete_task_confirm'])) {
         $task_id = $_POST['task_id'];
         $stmt = $pdo->prepare("DELETE FROM tasks WHERE id = ?");
         $stmt->execute([$task_id]);
@@ -51,7 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    if (isset($_POST['delete_column'])) {
+    // Handle delete column with confirmation
+    if (isset($_POST['delete_column_confirm'])) {
         $column_id = $_POST['column_id'];
         $stmt = $pdo->prepare("DELETE FROM tasks WHERE column_id = ?");
         $stmt->execute([$column_id]);
@@ -88,14 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formula</title>
     <link rel="stylesheet" href="/css/index-style.css">
-    <script>
-        function confirmDeletion(itemType, itemName, formElement) {
-            const confirmation = confirm(`Вы действительно хотите удалить ${itemType}: ${itemName}?`);
-            if (confirmation) {
-                formElement.submit();
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="user-panel">
@@ -122,9 +116,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="hidden" name="column_id" value="<?php echo $column['id']; ?>">
                         <button type="submit" name="edit_column">Сохранить</button>
                     </form>
-                    <form method="POST" action="" onsubmit="event.preventDefault(); confirmDeletion('столбец', '<?php echo htmlspecialchars($column['title']); ?>', this);">
+                    <form method="POST" action="">
                         <input type="hidden" name="column_id" value="<?php echo $column['id']; ?>">
-                        <button type="submit" class="delete-btn" name="delete_column">Удалить столбец</button>
+                        <input type="hidden" name="column_title" value="<?php echo htmlspecialchars($column['title']); ?>">
+                        <button type="submit" class="delete-btn" name="delete_column_confirm">Удалить столбец</button>
                     </form>
                 </div>
 
@@ -144,9 +139,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <input type="hidden" name="completed" value="<?php echo $task['completed']; ?>">
                             <button type="submit" class="toggle_complete" name="toggle_complete"><?php echo $task['completed'] ? '❌' : '✔️'; ?></button>
                         </form>
-                        <form method="POST" action="" onsubmit="event.preventDefault(); confirmDeletion('задачу', '<?php echo htmlspecialchars($task['title']); ?>', this);">
+                        <form method="POST" action="">
                             <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
-                            <button type="submit" class="delete-btn" name="delete_task" style="font-size: 1.2em;">🗑</button>
+                            <input type="hidden" name="task_title" value="<?php echo htmlspecialchars($task['title']); ?>">
+                            <button type="submit" class="delete-btn" name="delete_task_confirm" style="font-size: 1.2em;">🗑</button>
                         </form>
                     </div>
                 <?php endwhile; ?>
