@@ -1,4 +1,5 @@
 # Formula - Task Management System
+![image](https://github.com/user-attachments/assets/371b4197-09b9-4166-a089-f7f67771742e)
 
 ## Описание
 
