@@ -1,7 +1,7 @@
 @import url(branding.css);
 
 body {
-    font-family: 'Raleway',Arial,sans-serif;
+    font-family: 'NotoSans',Arial,sans-serif;
     background-color: #f4f4f4;
     display: flex;
     flex-direction: column;
@@ -34,21 +34,21 @@ form input[type=email],form input[type=password] {
 form button {
     width: 100%;
     padding: 15px;
-    background-color: #007bff;
+    background-color: #8231a0;
     color: #fff;
     border: 0;
-    border-radius: 4px;
+    border-radius: 33px;
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px
 }
 
 form button:hover {
-    background-color: #0056b3
+    background-color: #a756c5
 }
 
 form input[type=email]:focus,form input[type=password]:focus {
-    border-color: #007bff;
+    border-color: #8231a0;
     outline: 0
 }
 

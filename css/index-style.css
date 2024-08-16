@@ -1,157 +1,163 @@
 @import url(branding.css);
 
+/* Basic reset */
 * {
-    box-sizing: border-box
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Raleway',Arial,sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    color: #333
+    font-family: 'NotoSans', sans-serif;
+    background-color: var(--background-color);
+    color: var(--on-background-color);
+    padding: 16px;
+    line-height: 1.6;
+    background-color: #f4f4f4;
 }
 
+/* Layout Styles */
 .user-panel {
     width: 300px;
-    background-color: #fff;
+    background-color: #faf4fb;
     padding: 20px;
     box-shadow: 2px 0 10px rgba(0,0,0,.1);
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     height: 100%;
-    overflow-y: auto
-}
+    overflow-y: auto;
 
-.user-panel h1 {
-    margin-top: 0;
-    font-size: 24px;
-    color: #007bff
-}
-
-.user-panel form {
-    margin-bottom: 20px
-}
-
-.user-panel input[type=text] {
-    width: 100%;
-    margin-bottom: 15px
-}
-
-.column button,.task button,.user-panel button {
-    color: #fff;
-    border: 0;
-    border-radius: 4px;
-    cursor: pointer
-}
-
-.user-panel button {
-    width: 100%;
-    padding: 15px;
-    background-color: #007bff;
-    font-size: 16px;
-    margin-bottom: 10px
-}
-
-.user-panel button:hover {
-    background-color: #0056b3
-}
-
-.board,body {
     display: flex;
-    background-color: #f4f4f4
-}
-
-.board {
-    flex: 1;
-    margin-right: 300px;
-    padding: 20px;
-    flex-wrap: wrap;
-    gap: 20px
-}
-
-.column {
-    background-color: #fff;
-    padding: 20px;
-    width: fit-content;
-    box-shadow: 0 4px 10px rgba(0,0,0,.1);
-    border-radius: 8px;
     flex-direction: column;
-    gap: 15px
+    gap: 12px;
+
+    z-index: 1;
 }
 
-.column form {
-    margin-bottom: 15px;
-    display: flex
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
 }
 
-.column input[type=text],.user-panel input[type=text] {
+input[type=text] {
     padding: 15px;
     border-radius: 4px;
     border: 1px solid #ddd;
-    font-size: 16px
+    font-size: 16px;
+    width: fit-content;
 }
 
-.column,.column-control {
-    display: flex
+input[type=text]:focus {
+    border-color: #8231a0;
+    outline: 0
 }
 
-.column button,.task button {
-    padding: 10px;
-    background-color: #28a745;
-    font-size: 14px;
-    margin-right: 8px
-}
-
-.column button.delete-btn,.task,.task button.delete-btn {
-    background-color: #dc3545;
+.task-board {
     display: flex;
-    align-items: center;
-    justify-self: center
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-left: 300px
 }
 
-.column button:hover,.task button:hover {
-    opacity: .9
+.task-column {
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
 }
 
-.task {
-    background-color: #e9ecef;
-    padding: 15px;
-    border-radius: 4px;
+.column-header {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px
+    margin-bottom: 16px;
 }
 
-.task.completed {
-    opacity: .5
+.column-header form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
-.toggle_complete {
-    background-color: #eee!important;
-    border: #000 solid 1px!important
+input.column_title {
+    border: 0;
+    width: 100%;
 }
 
-@media (max-width:768px) {
-    body {
-        flex-direction: column
-    }
+input.new_column {
+    width: 100%;
+}
 
+.logout {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    text-decoration: none;
+}
+
+.logout button {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    color: #5f6368;
+}
+
+.task-item {
+    background-color: #f8f8f8;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-completed {
+    opacity: .5;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.task_add_form {
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
+
+.task-delete-form, .task-toggle-completion-form {
+    height: 24px;
+}
+
+@media (max-width: 768px) {
     .user-panel {
+        display: block;
         width: 100%;
-        height: auto;
+        height: 207px;
         position: relative;
-        box-shadow: none;
-        margin-bottom: 20px
+        border-radius: 8px;
+        overflow: hidden;
     }
-
-    .board {
-        margin-right: 0;
-        flex-direction: column
+    .logout {
+        bottom: auto;
+        left: auto;
+        top: 16px;
+        right: 16px;
     }
-
-    .column {
-        max-width: 100%
+    .task-board {
+        margin-left: 0;
+        margin-top: 16px;
+        /* margin-top: 207px; */
     }
 }

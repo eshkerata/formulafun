@@ -14,7 +14,15 @@
     font-display: swap;
 }
 
-.logo {
+@font-face {
+    font-family: 'NotoSans';
+    src: url(/src/NotoSans-VariableFont_wdth\,wght.ttf) format(truetype);
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+.site-logo {
     font-family: 'Urbanist', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 2.2em;
 }
@@ -22,4 +30,5 @@
 .dev-info, .dev-info a, .dev-info a:visited {
     color: #000;
     opacity: 0.7;
+    font-size: 0.7em;
 }

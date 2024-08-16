@@ -32,15 +32,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formula - Регистрация/Логин</title>
-    <link rel="stylesheet" href="/css/reglog-style.css">
+    <link rel="stylesheet" href="/css/reglog-style.css?v=3">
+
+    <style>
+        .site-logo {
+            margin-bottom: 0;
+        }
+        .subheader {
+            margin-top: 0;
+        }
+    </style>
+
 </head>
 <body>
-<h1 class="logo">Formula</h1>
+<h1 class="site-logo">Formula</h1>
+<p class="subheader">Успеха</p>
 <form method="POST" action="">
     <input type="email" name="email" placeholder="Почта" required>
     <input type="password" name="password" placeholder="Пароль" required>
