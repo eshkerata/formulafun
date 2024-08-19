@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formula - Регистрация/Логин</title>
+    <title>FormulaFun - Регистрация/Логин</title>
     <link rel="stylesheet" href="/src/css/index-style.css?v=3">
 
     <style>
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </head>
 <body>
-<h1 class="site-logo">Formula</h1>
+<h1 class="site-logo">FormulaFun</h1>
 <p class="subheader">Успеха</p>
 <form id="reglog" method="POST" action="">
     <input type="email" name="email" placeholder="Почта" required>

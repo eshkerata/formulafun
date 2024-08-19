@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db = 'formula';
+$db = 'formulafun';
 $user = 'root';
 $pass = '';
 
