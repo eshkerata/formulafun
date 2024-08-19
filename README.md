@@ -34,7 +34,7 @@
      ```
    - Импортируйте структуру базы данных из файла `schema.sql`:
      ```bash
-     mysql -u ваш_пользователь -p formulafun_db < schema.sql
+     mysql -u ваш_пользователь -p formula_db < schema.sql
      ```
 
 3. **Настройка конфигурации:**
@@ -49,7 +49,7 @@
 
      ```php
      $host = 'localhost';
-     $db = 'formulafun_db';
+     $db = 'formula_db';
      $user = 'ваш_пользователь';
      $pass = 'ваш_пароль';
      ```
