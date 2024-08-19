@@ -1,0 +1,82 @@
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+form#reglog {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    width: 100%;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus {
+    border-color: #8231a0;
+    outline: 0;
+}
+
+input.column_title {
+    border: 0;
+    width: 100%;
+}
+input.column_title:focus {
+    border: 0;
+    border-bottom: #8231a0 solid 1px;
+    width: 100%;
+}
+
+input.new_column {
+    width: 100%;
+}
+
+.logout button {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    color: #5f6368;
+}
+
+.task-item {
+    background-color: #f8f8f8;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-completed {
+    opacity: .5;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.task_add_form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.task-delete-form, .task-toggle-completion-form {
+    height: 24px;
+}

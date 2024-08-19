@@ -1,0 +1,22 @@
+@media (max-width: 768px) {
+    .user-panel {
+        display: block;
+        width: 100%;
+        display: flex;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .logout {
+        bottom: auto;
+        left: auto;
+        top: 16px;
+        right: 16px;
+    }
+
+    .task-board {
+        margin-left: 0;
+        margin-top: 16px;
+    }
+}
