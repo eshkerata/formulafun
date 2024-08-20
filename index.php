@@ -80,7 +80,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula</title>
+    <link rel="stylesheet" href="/src/css/index-style.css?v=4">
 
+    <meta name="title" content="FormulaFun - Система управления задачами">
+    <meta name="description" content="Простая система управления задачами для личного использования">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="Russian">
 <!-- Добавим небольшой скрипт для автоматической отправки формы при потере фокуса -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
