@@ -19,4 +19,22 @@
         margin-left: 0;
         margin-top: 16px;
     }
+
+    .task-column {
+        flex:auto;
+    }
 }
+
+@media (max-width: 425px) {
+    .column-header button.delete-button,
+    .task-item form button {
+        width: fit-content;
+    }
+    .column-title {
+        margin-left: 0;
+    }
+    .task-actions {
+        gap: 8px;
+    }
+}
+

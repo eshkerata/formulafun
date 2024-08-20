@@ -9,8 +9,8 @@
 
 body {
     font-family: 'NotoSans', sans-serif;
-    background-color: var(--background-color);
-    color: var(--on-background-color);
+    background-color: var(--background-color-1);
+    color: var(--text-color);
     padding: 16px;
-    background-color: #f4f4f4;
 }
+
