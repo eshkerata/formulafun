@@ -81,48 +81,63 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FormulaFun</title>
-    <link rel="stylesheet" href="/src/css/index-style.css?v=3">
+<!-- Добавим небольшой скрипт для автоматической отправки формы при потере фокуса -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const columnTitleInputs = document.querySelectorAll('.column_title input[type="text"]');
+            const taskTitleInputs = document.querySelectorAll('.task-actions input[type="text"]');
 
-    <meta name="title" content="FormulaFun - Система управления задачами">
-    <meta name="description" content="Простая система управления задачами для личного использования">
-    <meta name="robots" content="noindex, nofollow">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="language" content="Russian">
+            columnTitleInputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    this.form.submit();
+                });
+            });
 
+            taskTitleInputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    this.form.submit();
+                });
+            });
+        });
+
+        // Якорь на форму после её отправки
+        if (window.location.hash) {
+            const element = document.querySelector(window.location.hash);
+            if (element) {
+                window.scrollTo({
+                    top: element.offsetTop,
+                    behavior: "smooth"
+                });
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="user-panel">
         <div class="logo_info">
-            <h1 class="site-logo">FormulaFun</h1>
+            <h1 class="site-logo">Formula</h1>
             <p>Вход в систему как <?php echo htmlspecialchars($email); ?>.</p>
         </div>
-        <form method="POST" action="">
+        <form method="POST" action="#column_form">
             <input type="text" class="new_column" name="column_title" placeholder="Новая тема" required>
             <input type="hidden" name="add_column">
+            <input type="submit" style="display: none;" />
         </form>
         <a class="logout" href="logout.php"><button>Выйти <img src="/src/img/logout.svg"/></button></a>
         <p class="dev-info">
-            Версия 190824 &copy; "Эщкерята", 2024<br>
-            <a href="https://t.me/eshkerata_team">Telegram</a> | 
-            <a href="https://github.com/eshkerata/formulafun">GitHub</a>
+            Версия osp-200824 &copy; Эщкерята, 2024<br>
+            <a href="https://t.me/FormulaFun_Project">Telegram</a> | <a href="https://github.com/eshkerata/formulafun/blob/main/LICENSE.MD">Лицензия</a>
         </p>
     </div>
 
     <div class="task-board">
         <?php while ($column = $columns->fetch(PDO::FETCH_ASSOC)): ?>
-            <div class="task-column">
+            <div class="task-column" id="column_<?php echo $column['id']; ?>">
                 <div class="column-header">
-                    <form method="POST" action="">
+                    <form method="POST" id="column_form" class="column_title" action="#column_<?php echo $column['id']; ?>">
                         <input type="text" class="column_title" name="column_title" placeholder="Тема" value="<?php echo htmlspecialchars($column['title']); ?>">
                         <input type="hidden" name="column_id" value="<?php echo $column['id']; ?>">
                         <input type="hidden" name="edit_column_title">
-                        <!-- <button type="submit" name="edit_column_title"><img src="/src/img/save.svg"/></button> -->
                     </form>
                     <form method="POST" action="">
                         <input type="hidden" name="column_id" value="<?php echo $column['id']; ?>">
@@ -135,18 +150,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $tasks->execute([$column['id']]);
                 while ($task = $tasks->fetch(PDO::FETCH_ASSOC)):
                 ?>
-                    <div class="task-item <?php echo $task['completed'] ? 'task-completed' : ''; ?>">
+                    <div class="task-item <?php echo $task['completed'] ? 'task-completed' : ''; ?>" id="task_<?php echo $task['id']; ?>">
                         <div class="task-actions">
                             <form method="POST" action="" class="task-toggle-completion-form">
                                 <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
                                 <input type="hidden" name="completed" value="<?php echo $task['completed']; ?>">
                                 <button type="submit" class="task-toggle-complete" name="toggle_task_completion"><?php echo $task['completed'] ? '<img src="/src/img/check_box.svg"/>' : '<img src="/src/img/check_box_outline_blank.svg"/>'; ?></button>
                             </form>
-                            <form method="POST" action="">
+                            <form method="POST" action="#task_<?php echo $task['id']; ?>">
                                 <input type="text" name="task_title" placeholder="Имя задачи" value="<?php echo htmlspecialchars($task['title']); ?>">
                                 <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
                                 <input type="hidden" name="edit_task_title">
-                                <!-- <button type="submit" name="edit_task_title"><img src="/src/img/save.svg"></button> -->
                             </form>
                         </div>
                         
