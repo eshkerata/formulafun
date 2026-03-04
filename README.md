@@ -1,4 +1,4 @@
->![WARN]
+>[!WARNING]
 >Сделано для хакатона, желания поддерживать больше нет
 
 # FormulaFun - Task Management System
