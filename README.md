@@ -1,3 +1,6 @@
+>![WARN]
+>Сделано для хакатона, желания поддерживать больше нет
+
 # FormulaFun - Task Management System
 ![image](https://raw.githubusercontent.com/eshkerata/formulafun/main/src/img/ScreenShot.png)
 
